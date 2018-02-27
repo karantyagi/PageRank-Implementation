@@ -1,3 +1,12 @@
+'''
+This program computes Page Rank using ..
+It takes a stochastic adjacency matrix M as input,
+and returns  ....
+
+Author: Karan Tyagi
+Date 02/27/2018
+'''
+
 #// P is the set of all pages; |P| = N
 #// S is the set of sink nodes, i.e., pages that have no out links
 #// M(p) is the set of pages that link to page p
