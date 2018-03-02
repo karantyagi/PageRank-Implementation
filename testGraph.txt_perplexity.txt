@@ -1,0 +1,10 @@
+
+ Iteration  |  Perplexity value after iteration  | change in perplexity
+
+ Initial    |  6.0 
+
+ Round 1     |  5.771114844959283                        | 0.22888515504071716
+ Round 2     |  5.733686349070718                        | 0.037428495888565116
+ Round 3     |  5.842186225607963                        | 0.10849987653724558
+ Round 4     |  5.819459876704576                        | 0.02272634890338754
+ Convergence achieved

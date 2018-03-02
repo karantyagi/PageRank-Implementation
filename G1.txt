@@ -1,0 +1,10 @@
+Solar_eclipse Earth Eclipse Moon Sun Occultation New_moon Conjunction_(astronomy_and_astrology) Syzygy_(astronomy)
+Earth Earth Eclipse Moon Sun Occultation Syzygy_(astronomy) Ecliptic
+Eclipse Moon New_moon Conjunction_(astronomy_and_astrology) Syzygy_(astronomy) Ecliptic
+Moon Sun Occultation New_moon Conjunction_(astronomy_and_astrology) Syzygy_(astronomy) Ecliptic
+Sun New_moon Conjunction_(astronomy_and_astrology) Syzygy_(astronomy) Ecliptic
+Occultation Conjunction_(astronomy_and_astrology) Syzygy_(astronomy)
+New_moon Conjunction_(astronomy_and_astrology) Syzygy_(astronomy)
+Conjunction_(astronomy_and_astrology) Ecliptic
+Syzygy_(astronomy)
+Ecliptic

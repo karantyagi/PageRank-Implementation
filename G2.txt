@@ -1,0 +1,15 @@
+Solar_eclipse Earth
+Earth Earth Planet Astronomical_body Physics Matter
+Planet Astronomical_body Physics
+Astronomical_body
+Physical_body Identity_(philosophy) Matter Particle
+Physics Matter Three-dimensional_space 3-dimensional_space Interaction Continuous_media
+Identity_(philosophy)
+Matter Three-dimensional_space 3-dimensional_space Particle
+Three-dimensional_space
+Contiguous
+3-dimensional_space
+Scientific_model Particle
+Particle
+Interaction
+Continuous_media
