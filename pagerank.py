@@ -153,7 +153,8 @@ for p in P:
 
 
 perplx_list = []
-createPathIfNotExists("./"+filename.split('.txt')[0]+"/")
+# create path if it does not exist
+createPath("./"+filename.split('.txt')[0]+"/")
 perpxFile = open(filename.split('.txt')[0]+"/"+filename.split('.txt')[0]+"perplexity.txt","w")
 iteration = 0
 
@@ -194,5 +195,6 @@ print_pageranks(PR)
 #print(perplx_list)
 
 webgraph_Stats(inlink_graph)
-top_n_PR(4,filename,PR)
-top_n_inlinks(4,filename,inlink_graph)
+top_n_PR(50,filename,PR)
+top_n_inlinks(50,filename,inlink_graph)
+top_n(50,filename,PR,inlink_graph)

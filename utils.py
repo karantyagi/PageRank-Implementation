@@ -91,14 +91,8 @@ def print_pageranks(PR):
 ###############################################################################
 
 # Given  :
-# Effect :
-def top50(PRdict,inlinkDict):
-    print(" Still working on the code !")
-
-###############################################################################
-# Given  :
-# Effect :
-def createPathIfNotExists(path):
+# Effect : create path if it does not exist
+def createPath(path):
     dir = os.path.dirname(path)
     if not os.path.exists(dir):
             os.makedirs(dir)
@@ -107,7 +101,8 @@ def createPathIfNotExists(path):
 # Given  :
 # Effect :
 def top_n_PR(n,filename,PRdict):
-    createPathIfNotExists("./"+filename.split('.txt')[0]+"/")
+    # create path if it does not exist
+    createPath("./"+filename.split('.txt')[0]+"/")
     f = open(filename.split('.txt')[0]+"/Top"+str(n)+"PageRanks.txt","w")
     i = 1
     sortedPR = OrderedDict(sorted(PRdict.items(), key=itemgetter(1),reverse=True))
@@ -126,7 +121,8 @@ def top_n_PR(n,filename,PRdict):
 # Given  :
 # Effect :
 def top_n_inlinks(n,filename,inlink_dict):
-    createPathIfNotExists("./"+filename.split('.txt')[0]+"/")
+    # create path if it does not exist
+    createPath("./"+filename.split('.txt')[0]+"/")
     f = open(filename.split('.txt')[0]+"/Top"+str(n)+"Inlinks.txt","w")
     i = 1
     sorted_dict = OrderedDict(sorted(inlink_dict.items(), key=lambda x: len(x[1]),reverse=True))
@@ -138,6 +134,28 @@ def top_n_inlinks(n,filename,inlink_dict):
         i +=1
     f.close()
     print("\nTop"+str(n)+"Inlinks.txt created.\n")
+
+###############################################################################
+
+# Given  :
+# Effect :
+def top_n(n,filename,PRdict,inlinkDict):
+    # create path if it does not exist
+    createPath("./"+filename.split('.txt')[0]+"/")
+    f = open(filename.split('.txt')[0]+"/Top"+str(n)+".txt","w")
+    i = 1
+    sortedPR = OrderedDict(sorted(PRdict.items(), key=itemgetter(1),reverse=True))
+    sortedinLinks = OrderedDict(sorted(inlinkDict.items(), key=lambda x: len(x[1]),reverse=True))
+    for (page,rank), (pg,inlinks) in zip(sortedPR.items(),sortedinLinks.items()):
+        if i > n:
+            break
+        f.write(str(page).ljust(30)
+        +'{}'.format(rank).ljust(30)
+        +'{}'.format(len(inlinks))
+        +"\n")
+        i +=1
+    f.close()
+    print("\nTop"+str(n)+".txt created.\n")
 
 ###############################################################################
 
