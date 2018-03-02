@@ -109,7 +109,7 @@ def top_n_PR(n,filename,PRdict):
     for page,rank in sortedPR.items():
         if i > n:
             break
-        f.write(str(page).ljust(40)
+        f.write(str(page).ljust(48)
         +'{}'.format(rank)+"\n")
         i +=1
     f.close()
@@ -129,7 +129,7 @@ def top_n_inlinks(n,filename,inlink_dict):
     for page,inlinks in sorted_dict.items():
         if i > n:
             break
-        f.write(str(page).ljust(40)
+        f.write(str(page).ljust(48)
         +'{}'.format(len(inlinks))+"\n")
         i +=1
     f.close()
@@ -149,7 +149,7 @@ def top_n(n,filename,PRdict,inlinkDict):
     for (page,rank), (pg,inlinks) in zip(sortedPR.items(),sortedinLinks.items()):
         if i > n:
             break
-        f.write(str(page).ljust(30)
+        f.write(str(page).ljust(48)
         +'{}'.format(rank).ljust(30)
         +'{}'.format(len(inlinks))
         +"\n")
@@ -172,7 +172,7 @@ def webgraph_Stats(webgraph):
     #avg_inlinks
     #avg_outlinks
 
-    print("\n\t Web Graph Stats")
+    print("\n\t Web Graph Stats . . . . . . . . . .   [Computing - plz wait for 5 secs at max]")
     print('\n\tNodes    : ',len(webgraph))
     for key, values in webgraph.items():
         outlnk = len(compute_outlinks(key,webgraph))
@@ -207,32 +207,3 @@ def top50_pageranks():
 '''
 
 ###############################################################################
-
-# -----------------------------------------------------------
-
-# Given   :
-# Effect  :
-def write_graph_to_file():
-    f= open('G2.txt','w')
-    i=1
-    for key,value in webgraph.items():
-        f.write(('Webpage {} :'.format(i).ljust(15)))
-        f.write(key)
-        for inlink in value:
-            f.write(" "+inlink)
-        f.write("\n")
-        i+=1
-    f.close()
-    print('\n\tKeys added to file : G2.txt')
-    print('\n\t# of keys : {} '.format(i-1))
-# ----------------------------------------------------------------------------
-
-'''
-if __name__ == "__main__":
-    file_nm = "G2.txt"
-    create_webgraph(file_nm)
-    print_webgraph()
-    print_all_outlinks(inlink_webgraph)
-    #print_outlinks('D',inlink_webgraph)
-    webgraph_Stats(inlink_webgraph)
-'''
