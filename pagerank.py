@@ -133,7 +133,7 @@ def converged(perpx_list):
             if abs(perplx_list[i] - perplx_list[i-1]) < 1:
                 count +=1
                 #print(abs(perplx_list[i] - perplx_list[i-1]))
-                print("Consecutive iteration : {} - {}".format(i+1,i))
+                print("Consecutive iteration : {} - {}".format(i,i-1))
                 if count == 4:
                     print("convergence reached")
                     return True
@@ -151,7 +151,7 @@ for p in P:
 
 
 perplx_list = []
-perpxFile = open(filename+"_perplexity.txt","w")
+perpxFile = open(filename.split('.txt')[0]+"_perplexity.txt","w")
 iteration = 0
 
 # initial perplexity value
