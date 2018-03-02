@@ -90,6 +90,57 @@ def print_pageranks(PR):
 
 ###############################################################################
 
+# Given  :
+# Effect :
+def top50(PRdict,inlinkDict):
+    print(" Still working on the code !")
+
+###############################################################################
+# Given  :
+# Effect :
+def createPathIfNotExists(path):
+    dir = os.path.dirname(path)
+    if not os.path.exists(dir):
+            os.makedirs(dir)
+
+###############################################################################
+# Given  :
+# Effect :
+def top_n_PR(n,filename,PRdict):
+    createPathIfNotExists("./"+filename.split('.txt')[0]+"/")
+    f = open(filename.split('.txt')[0]+"/Top"+str(n)+"PageRanks.txt","w")
+    i = 1
+    sortedPR = OrderedDict(sorted(PRdict.items(), key=itemgetter(1),reverse=True))
+    for page,rank in sortedPR.items():
+        if i > n:
+            break
+        f.write(str(page).ljust(40)
+        +'{}'.format(rank)+"\n")
+        i +=1
+    f.close()
+    print("\nTop"+str(n)+"PageRanks.txt created.\n")
+
+
+###############################################################################
+
+# Given  :
+# Effect :
+def top_n_inlinks(n,filename,inlink_dict):
+    createPathIfNotExists("./"+filename.split('.txt')[0]+"/")
+    f = open(filename.split('.txt')[0]+"/Top"+str(n)+"Inlinks.txt","w")
+    i = 1
+    sorted_dict = OrderedDict(sorted(inlink_dict.items(), key=lambda x: len(x[1]),reverse=True))
+    for page,inlinks in sorted_dict.items():
+        if i > n:
+            break
+        f.write(str(page).ljust(40)
+        +'{}'.format(len(inlinks))+"\n")
+        i +=1
+    f.close()
+    print("\nTop"+str(n)+"Inlinks.txt created.\n")
+
+###############################################################################
+
 # Given   :
 # Effect  :
 

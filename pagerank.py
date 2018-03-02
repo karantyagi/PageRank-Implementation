@@ -66,6 +66,7 @@ import os.path
 
 filename = sys.argv[1]
 
+
 inlink_graph = dict() # dictionary consisting of webpages and thier inlinks
 outlink_graph= dict() # dictionary consisting of webpages and thier outlinks
 P = {}                # the set of all pages
@@ -80,7 +81,7 @@ PR = dict()              # PageRank dictionary - pages as keys and
                          # their respective page ranks as their value
 newPR = dict()           # dictionary for temporary page ranks calculation
 
-d = 0.85                 # damping/teleportation factor
+d = 0.85                # d is damping/teleportation factor
 
 ## Loading inlink webGraph
 inlink_graph = load_inlink_webgraph(filename)
@@ -117,7 +118,8 @@ def entropy():
     sum = 0.0
     for i,pagerank in PR.items():
         sum += PR[i]*(math.log(PR[i])/math.log(2))
-    return sum*-1
+    sum = sum*-1
+    return sum
 
 def perplexity():
     return math.pow(2,entropy())
@@ -151,7 +153,8 @@ for p in P:
 
 
 perplx_list = []
-perpxFile = open(filename.split('.txt')[0]+"_perplexity.txt","w")
+createPathIfNotExists("./"+filename.split('.txt')[0]+"/")
+perpxFile = open(filename.split('.txt')[0]+"/"+filename.split('.txt')[0]+"perplexity.txt","w")
 iteration = 0
 
 # initial perplexity value
@@ -168,9 +171,9 @@ while not convergence:
         sinkPR += PR[s]
     for p in P:
         newPR[p] = (1.0 - d)/N     ## Teleportation
-        newPR[p] += (d*sinkPR/N)   ## Spreading remaining sink PR evenly
+        newPR[p] += d*sinkPR/N  ## Spreading remaining sink PR evenly
         for q in set(inlink_graph[p]):
-            newPR[p] += (d * PR[q])/L[q]
+            newPR[p] += d*PR[q]/L[q]
 
     for page in P:
         PR[page] = newPR[page]
@@ -185,8 +188,11 @@ while not convergence:
 
 perpxFile.write("\n Convergence achieved")
 perpxFile.close()
+print("\n",filename.split('.txt')[0]+"perplexity.txt created.\n")
 
 print_pageranks(PR)
 #print(perplx_list)
 
 webgraph_Stats(inlink_graph)
+top_n_PR(4,filename,PR)
+top_n_inlinks(4,filename,inlink_graph)
