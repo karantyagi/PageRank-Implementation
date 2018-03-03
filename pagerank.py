@@ -64,7 +64,7 @@ import os.path
 '''
 # -------------------------------------------------------------------------
 
-filename = sys.argv[1]
+filename = str(sys.argv[1])
 
 
 inlink_graph = dict() # dictionary consisting of webpages and thier inlinks
@@ -89,28 +89,28 @@ outlink_graph = compute_outlinks_graph(inlink_graph)
 
 # test - print inlink webGraph
 print('\n\n\t\t\tInlinks webgraph dictionary\n')
-print_graph(inlink_graph)
-S
+#print_graph(inlink_graph)
+
 # test - print outlink webGraph
 print('\n\n\t\t\tOutlinks webgraph dictionary\n')
-print_graph(outlink_graph)
+#print_graph(outlink_graph)
 
 ## Finding all Pages
 P = set(inlink_graph.keys()) # set of all pages
 N = len(P)
-print("\n  Pages",P)
+## print("\n  Pages",P)
 print("\n  No. of Pages : ",N)
 
 
 ## Finding Sinks
 S = find_sinks(outlink_graph)
-print("\n  Sinks",S)
+## print("\n  Sinks",S)
 
 # page is the key
 # value is a list of outlinks for the given page
 for page,outlinks in outlink_graph.items():
     L[page] = len(set(outlinks))
-print("\n  Number of outlinks per page \n\n ",L,"\n")
+## print("\n  Number of outlinks per page \n\n ",L,"\n")
 
 convergence = False
 
@@ -154,16 +154,16 @@ for p in P:
 
 perplx_list = []
 # create path if it does not exist
-createPath("./"+filename.split('.txt')[0]+"/")
-perpxFile = open(filename.split('.txt')[0]+"/"+filename.split('.txt')[0]+"perplexity.txt","w")
+createPath("../output/"+filename.split('.txt')[0]+"/")
+perpxFile = open("../output/"+filename.split('.txt')[0]+"/"+filename.split('.txt')[0]+"_perplexity_details.txt","w")
 iteration = 0
 
 # initial perplexity value
 perplx_list.append(perplexity())
 
-perpxFile.write("\n Iteration  |  Perplexity value after iteration  | change in perplexity\n")
+perpxFile.write("Iteration".ljust(14)+"Perplexity after iteration".ljust(30)+"Change in perplexity\n\n")
 #perpxFile.write("\n Iteration  |  Perplexity value after iteration\n\n")
-perpxFile.write("\n Initial    |  {} \n".format(perplx_list[0]))
+perpxFile.write("Round 0".ljust(14)+str(perplx_list[0]).ljust(30)+"Initial Perplexity")
 
 while not convergence:
     iteration += 1                  ## start as 1st iteration
@@ -181,20 +181,22 @@ while not convergence:
 
     # computing new perplexity values
     perplx_list.append(perplexity())
-    perpxFile.write("\n Round {}     |  {}                        | {}".format(iteration,perplx_list[iteration],perplx_change(perplx_list)))
-    print(" ***** perplexity list length : ",len(perplx_list))
+    perpxFile.write(("\nRound {}".format(iteration).ljust(15)
+    +str(perplx_list[iteration]).ljust(30)
+    +str(perplx_change(perplx_list))))
+
+    print("***** perplexity list length : ",len(perplx_list))
     if converged(perplx_list):
         convergence = True  # convergence achieved, halt now
 
 
-perpxFile.write("\n Convergence achieved")
+perpxFile.write("\n\nConvergence achieved")
 perpxFile.close()
-print("\n",filename.split('.txt')[0]+"perplexity.txt created.\n")
+print("\n",filename.split('.txt')[0]+"_perplexity_details.txt created.\n")
 
-print_pageranks(PR)
+## print_pageranks(PR)
 #print(perplx_list)
 
 webgraph_Stats(inlink_graph)
 top_n_PR(50,filename,PR)
 top_n_inlinks(50,filename,inlink_graph)
-top_n(50,filename,PR,inlink_graph)

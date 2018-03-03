@@ -1,4 +1,5 @@
 import os.path
+import operator
 from operator import itemgetter
 from collections import OrderedDict
 
@@ -102,8 +103,8 @@ def createPath(path):
 # Effect :
 def top_n_PR(n,filename,PRdict):
     # create path if it does not exist
-    createPath("./"+filename.split('.txt')[0]+"/")
-    f = open(filename.split('.txt')[0]+"/Top"+str(n)+"PageRanks.txt","w")
+    createPath("../output/"+filename.split('.txt')[0]+"/")
+    f = open("../output/"+filename.split('.txt')[0]+"/"+filename.split('.txt')[0]+"_Top"+str(n)+"PageRanks.txt","w")
     i = 1
     sortedPR = OrderedDict(sorted(PRdict.items(), key=itemgetter(1),reverse=True))
     for page,rank in sortedPR.items():
@@ -113,7 +114,7 @@ def top_n_PR(n,filename,PRdict):
         +'{}'.format(rank)+"\n")
         i +=1
     f.close()
-    print("\nTop"+str(n)+"PageRanks.txt created.\n")
+    print("\n"+filename.split('.txt')[0]+"_Top"+str(n)+"PageRanks.txt created.")
 
 
 ###############################################################################
@@ -122,8 +123,8 @@ def top_n_PR(n,filename,PRdict):
 # Effect :
 def top_n_inlinks(n,filename,inlink_dict):
     # create path if it does not exist
-    createPath("./"+filename.split('.txt')[0]+"/")
-    f = open(filename.split('.txt')[0]+"/Top"+str(n)+"Inlinks.txt","w")
+    createPath("../output/"+filename.split('.txt')[0]+"/")
+    f = open("../output/"+filename.split('.txt')[0]+"/"+filename.split('.txt')[0]+"_Top"+str(n)+"Inlinks.txt","w")
     i = 1
     sorted_dict = OrderedDict(sorted(inlink_dict.items(), key=lambda x: len(x[1]),reverse=True))
     for page,inlinks in sorted_dict.items():
@@ -133,31 +134,10 @@ def top_n_inlinks(n,filename,inlink_dict):
         +'{}'.format(len(inlinks))+"\n")
         i +=1
     f.close()
-    print("\nTop"+str(n)+"Inlinks.txt created.\n")
+    print("\n"+filename.split('.txt')[0]+"_Top"+str(n)+"Inlinks.txt created.")
 
 ###############################################################################
 
-# Given  :
-# Effect :
-def top_n(n,filename,PRdict,inlinkDict):
-    # create path if it does not exist
-    createPath("./"+filename.split('.txt')[0]+"/")
-    f = open(filename.split('.txt')[0]+"/Top"+str(n)+".txt","w")
-    i = 1
-    sortedPR = OrderedDict(sorted(PRdict.items(), key=itemgetter(1),reverse=True))
-    sortedinLinks = OrderedDict(sorted(inlinkDict.items(), key=lambda x: len(x[1]),reverse=True))
-    for (page,rank), (pg,inlinks) in zip(sortedPR.items(),sortedinLinks.items()):
-        if i > n:
-            break
-        f.write(str(page).ljust(48)
-        +'{}'.format(rank).ljust(30)
-        +'{}'.format(len(inlinks))
-        +"\n")
-        i +=1
-    f.close()
-    print("\nTop"+str(n)+".txt created.\n")
-
-###############################################################################
 
 # Given   :
 # Effect  :
@@ -187,23 +167,12 @@ def webgraph_Stats(webgraph):
         if(outlnk > max_outlinks):
             max_outlinks = outlnk
     print('\tSinks    : ',len(sink))
-    print('\t',sink)
+    ## print('\t',sink)
     print('\tSources  : ',len(source))
-    print('\t',source)
+    ## print('\t',source)
     print('\tMax number of inlinks for any node  : ',max_inlinks)
     print('\tMax number of outlinks for any node : ',max_outlinks)
     print('\tAverage inlinks per node            : ',(in_count/len(webgraph)))
     print('\tAverage outlinks per node           : ',(out_count/len(webgraph)))
-
-###############################################################################
-
-# Given   :
-# Effect : Prints and writes to file
-
-'''
-def top50_pageranks():
-    f=open("Top50PageRanks"+.txt",'w+')
-    for page,value in G[0:50]
-'''
 
 ###############################################################################
